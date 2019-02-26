@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,minimum-scale=0.1,maximum-scale=10,initial-scale=1.0,user-scalable=yes"/>
+
+        <link rel="stylesheet" href="[:vendor]/components/bootstrap/css/bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="[:vendor]/components/font-awesome/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="[:vendor]/kendu/sb-admin-2/css/sb-admin-2.css">
+       
+        <script src="[:vendor]/components/jquery/jquery.js"></script>
+        <script src="[:vendor]/components/bootstrap/js/bootstrap.min.js"></script>
+        <script src="[:app]/js/vue.js"></script>
+        <script src="[:vendor]/components/metismenu/src/metisMenu.js"></script>
+        <script src="[:vendor]/kendu/sb-admin-2/js/sb-admin-2.js"></script>
+
+        <link rel="stylesheet" href="[:app]/css/common.css">
+        <script src="[:app]/js/main.js"></script>
+
+        <title></title>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="?"> log </a>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li class=""><a class="">user</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li data-toggle="modal" data-target="#sign_out_dialog_modal">
+                            <a href="#"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav in" id="side-menu">
+                        <li><a href="?index/index"><i class="fa fa-balance-scale fa-fw"></i>&nbsp;日志列表</a></li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+

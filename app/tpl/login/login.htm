@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no"/>
+
+        <link rel="stylesheet" href="[:vendor]/components/bootstrap/css/bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="[:vendor]/components/font-awesome/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="[:vendor]/kendu/sb-admin-2/css/sb-admin-2.css">
+       
+        <script src="[:vendor]/components/jquery/jquery.js"></script>
+        <script src="[:vendor]/components/bootstrap/js/bootstrap.min.js"></script>
+        <script src="[:app]/js/vue.js"></script>
+        <script src="[:vendor]/components/metismenu/src/metisMenu.js"></script>
+        <script src="[:vendor]/kendu/sb-admin-2/js/sb-admin-2.js"></script>
+
+        <link rel="stylesheet" href="[:app]/css/common.css">
+        <link rel="stylesheet" href="[:app]/css/login.css">
+        <script src="[:app]/js/main.js"></script>
+
+
+        <title> 登陆 </title>
+    </head>
+    <body>
+        <div class="main-wrapper">
+            <div class="login-header">
+                <i class="fa fa-user"></i>
+                <label>用户登录</label>
+            </div>
+            <div class="login-wrapper">
+                <div class="login-field m-b-15">
+                    <input type="text" placeholder="请输入用户名" id="username" />
+                    <i class="user-icon fa fa-user"></i>
+                </div>
+                <div class="login-field m-b-15">
+                    <input type="password" placeholder="请输入密码" id="password" />
+                    <i class="user-icon fa fa-key"></i>
+                </div>
+                <!-- div class="login-field">
+                    <a class="pull-left" href="?login/register">账号注册</a>
+                    <a class="pull-right" href="?login/forget">忘记密码?</a>
+                </div -->
+                <div class="login-field">
+                    <button class="btn btn-primary" id="do-login">登陆</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="theModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">登陆失败</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>帐号密码错误或认证服务器暂不可用</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
+

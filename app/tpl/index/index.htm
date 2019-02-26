@@ -1,0 +1,30 @@
+
+<div id="page-content">
+    <div v-if="infos == null">
+        loading...
+    </div>
+    <div v-if="infos != null">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>token</th>
+                    <th>name</th>
+                    <th>contact</th>
+                    <th>message</th>
+                    <th>file</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(f, k) in infos">
+                    <td>{{f.id}}</td>
+                    <td>{{f.token}}</td>
+                    <td>{{f.name}}</td>
+                    <td>{{f.contact}}</td>
+                    <td>{{f.message}}</td>
+                    <td>{{f.file}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
