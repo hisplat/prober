@@ -1,4 +1,3 @@
-
 <div id="page-content">
     <div v-if="infos == null">
         loading...
@@ -22,7 +21,7 @@
                     <td>{{f.name}}</td>
                     <td>{{f.contact}}</td>
                     <td>{{f.message}}</td>
-                    <td>{{f.file}}</td>
+                    <td><a v-bind:href="f.fileurl">{{f.filename}}</a></td>
                 </tr>
             </tbody>
         </table>

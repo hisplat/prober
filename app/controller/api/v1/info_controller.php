@@ -5,6 +5,13 @@ include_once(dirname(__FILE__) . "/../v1_base.php");
 class info_controller extends v1_base {
     public function list_action() {
         $all = db_info::inst()->all();
+        foreach ($all as $k => $v) {
+            if (empty($v["filename"])) {
+                $all[$k]["fileurl"] = "#";
+            } else {
+                $all[$k]["fileurl"] = UPLOAD_URL . $v["filename"];
+            }
+        }
         return array("op" => "info.list", "data" => $all);
     }
 
