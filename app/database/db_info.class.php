@@ -63,6 +63,23 @@ class db_info extends database {
         }
         return $ret;
     }
+
+    public function update_filename($token, $filename) {
+        $infotable = MYSQL_PREFIX . "info";
+        $one = $this->get_by_token($token);
+        if (empty($one)) {
+            $ret = $this->insert($infotable, array(
+                "token" => $token,
+                "filename" => $filename,
+            ));
+        } else {
+            $token = $this->escape($token);
+            $ret = $this->update($infotable, array(
+                "filename" => $filename,
+            ), "token = $token");
+        }
+        return $ret;
+    }
 };
 
 

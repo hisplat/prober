@@ -7,23 +7,22 @@ function route() {
         session_start();
     }
 
-    $debug = false;
-    if (isset($_REQUEST["debugroute"]) && $_REQUEST["debugroute"] == "1") {
-        $debug = true;
-    }
-
-    if (isset($_SESSION["route.domain"]) && isset($_SESSION["route.subdomain"]) && isset($_SESSION["route.content"])) {
-        $domain = $_SESSION["route.domain"];
-        $subdomain = $_SESSION["route.subdomain"];
-        $contents = $_SESSION["route.content"];
-        $contents = str_replace("<?php", "", $contents);
-        eval($contents);
-        if (!$debug && (!defined("DEBUG") || !DEBUG)) {
-            logging::d("route", "route from session: $subdomain.$domain");
-            return;
-        }
-        logging::d("route", "check domain instead of session because DEBUG is true.");
-    }
+    // $debug = true;
+    // if (isset($_REQUEST["debugroute"]) && $_REQUEST["debugroute"] == "1") {
+    //     $debug = true;
+    // }
+    // if (isset($_SESSION["route.domain"]) && isset($_SESSION["route.subdomain"]) && isset($_SESSION["route.content"])) {
+    //     $domain = $_SESSION["route.domain"];
+    //     $subdomain = $_SESSION["route.subdomain"];
+    //     $contents = $_SESSION["route.content"];
+    //     $contents = str_replace("<?php", "", $contents);
+    //     if (!$debug && (!defined("DEBUG") || !DEBUG)) {
+    //         eval($contents);
+    //         logging::d("route", "route from session: $subdomain.$domain");
+    //         return;
+    //     }
+    //     logging::d("route", "check domain instead of session because DEBUG is true.");
+    // }
 
     include_once(dirname(__FILE__) . "/domain.php");
     $d = new domain();

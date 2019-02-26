@@ -1,6 +1,6 @@
 <?php
 
-include_once(dirname(__FILE__) . "/config.php");
+// include_once(dirname(__FILE__) . "/../config.php");
 
 function uploadImageViaFileReader($imgsrc = null, $callback = null, $args = null) {
     $whitelist = array("image/jpeg", "image/pjpeg", "image/png", "image/x-png", "image/gif");
@@ -48,6 +48,43 @@ function uploadImageViaFileReader($imgsrc = null, $callback = null, $args = null
     if ($callback != null) {
         return $callback($filename, $args);
     }
+    return "success";
+}
+
+
+function uploadFile($token, $callback = null, $args = null) {
+    logging::d("upload", $_FILES);
+
+    if (!isset($_FILES["file"]["tmp_name"])) {
+        return "fail|" . $_FILES["file"]["error"];
+    }
+
+    $token = md5($token);
+
+    $sz = substr($token, 0, 2);
+    $uploaddir = UPLOAD_DIR . "/$sz";
+
+    // logging::d("Debug", ROOT_PATH);
+    logging::d("Debug", $uploaddir);
+    if (!file_exists($uploaddir)) {
+        $ret = @mkdir($uploaddir, 0777, true);
+        if ($ret === false) {
+            return "fail|上传目录创建失败.";
+        }
+    }
+
+    $filename = $token . ".zip";
+    $filepath = $uploaddir . "/$filename";
+
+    $ret = move_uploaded_file($_FILES["file"]["tmp_name"], $filepath);
+    if (!$ret) {
+        return "fail|移动文件失败.";
+    }
+
+    if ($callback != null) {
+        return $callback("$sz/$filename", $args);
+    }
+
     return "success";
 }
 
