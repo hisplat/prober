@@ -12,6 +12,7 @@ include_once(dirname(__FILE__) . "/database/db_info.class.php");
 include_once(dirname(__FILE__) . "/app/login.class.php");
 include_once(dirname(__FILE__) . "/app/setting.class.php");
 include_once(dirname(__FILE__) . "/app/upload.php");
+include_once(dirname(__FILE__) . "/app/iplookup.php");
 
 // database
 defined('MYSQL_SERVER') or define('MYSQL_SERVER', 'localhost');

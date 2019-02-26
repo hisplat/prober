@@ -8,6 +8,9 @@
                 <tr>
                     <th>id</th>
                     <th>token</th>
+                    <th>time</th>
+                    <th>messageip</th>
+                    <th>uploadip</th>
                     <th>name</th>
                     <th>contact</th>
                     <th>message</th>
@@ -18,10 +21,13 @@
                 <tr v-for="(f, k) in infos">
                     <td>{{f.id}}</td>
                     <td>{{f.token}}</td>
+                    <td>{{f.time}}</td>
+                    <td>{{f.messageip}}</td>
+                    <td>{{f.uploadip}}</td>
                     <td>{{f.name}}</td>
                     <td>{{f.contact}}</td>
                     <td>{{f.message}}</td>
-                    <td><a v-bind:href="f.fileurl">{{f.filename}}</a></td>
+                    <td><a v-bind:href="f.fileurl" v-if="f.filename != ''">点击下载</a></td>
                 </tr>
             </tbody>
         </table>

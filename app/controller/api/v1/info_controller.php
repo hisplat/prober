@@ -11,6 +11,7 @@ class info_controller extends v1_base {
             } else {
                 $all[$k]["fileurl"] = UPLOAD_URL . $v["filename"];
             }
+            $all[$k]["time"] = Date("Y-m-d H:i:s", $v["time"]);
         }
         return array("op" => "info.list", "data" => $all);
     }

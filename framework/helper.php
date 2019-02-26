@@ -203,3 +203,10 @@ function __array_column($array, $column_key, $index_key = null) {
     return $result; 
 }
 
+function get_client_ip() {
+    if (PHP_SAPI == "cli") {
+        return "CLI-SHELL";
+    }
+    return $_SERVER["REMOTE_ADDR"];
+}
+

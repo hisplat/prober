@@ -46,12 +46,18 @@ class db_info extends database {
     public function update_message($token, $message, $name, $contact) {
         $infotable = MYSQL_PREFIX . "info";
         $one = $this->get_by_token($token);
+        $now = time(NULL);
+        $ip = get_client_ip();
+        $loc = iplookup($ip);
+        $ip = "$loc($ip)";
         if (empty($one)) {
             $ret = $this->insert($infotable, array(
                 "message" => $message,
                 "name" => $name,
                 "contact" => $contact,
                 "token" => $token,
+                "time" => $now,
+                "messageip" => $ip,
             ));
         } else {
             $token = $this->escape($token);
@@ -59,6 +65,8 @@ class db_info extends database {
                 "message" => $message,
                 "name" => $name,
                 "contact" => $contact,
+                "time" => $now,
+                "messageip" => $ip,
             ), "token = $token");
         }
         return $ret;
@@ -66,16 +74,24 @@ class db_info extends database {
 
     public function update_filename($token, $filename) {
         $infotable = MYSQL_PREFIX . "info";
+        $now = time(NULL);
+        $ip = get_client_ip();
+        $loc = iplookup($ip);
+        $ip = "$loc($ip)";
         $one = $this->get_by_token($token);
         if (empty($one)) {
             $ret = $this->insert($infotable, array(
                 "token" => $token,
                 "filename" => $filename,
+                "time" => $now,
+                "uploadip" => $ip,
             ));
         } else {
             $token = $this->escape($token);
             $ret = $this->update($infotable, array(
                 "filename" => $filename,
+                "time" => $now,
+                "uploadip" => $ip,
             ), "token = $token");
         }
         return $ret;
