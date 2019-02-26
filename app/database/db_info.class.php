@@ -33,7 +33,7 @@ class db_info extends database {
 
     public function all() {
         $infotable = MYSQL_PREFIX . "info";
-        return $this->get_all_table($infotable);
+        return $this->get_all_table($infotable, "", "ORDER BY id DESC");
     }
 
     public function get_by_token($token) {

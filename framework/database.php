@@ -175,9 +175,9 @@ class database {
         if ($result !== false) {
             while ($tmpArray = $result->fetch(PDO::FETCH_ASSOC)) {
                 $tmpArray = $this->do_unescape($tmpArray);
-                if (isset($tmpArray["id"]))
-                    $resArray[$tmpArray["id"]] = $tmpArray;
-                else
+                // if (isset($tmpArray["id"]))
+                //     $resArray[$tmpArray["id"]] = $tmpArray;
+                // else
                     $resArray[] = $tmpArray;
             }
         }
