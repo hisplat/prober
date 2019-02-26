@@ -53,11 +53,14 @@ function uploadImageViaFileReader($imgsrc = null, $callback = null, $args = null
 
 
 function uploadFile($token, $callback = null, $args = null) {
-    logging::d("upload", $_FILES);
+    // logging::d("upload", $_FILES);
+    // logging::d("uploadDebug", $c);
 
-    if (!isset($_FILES["file"]["tmp_name"])) {
-        return "fail|" . $_FILES["file"]["error"];
-    }
+    // if (!isset($_FILES["file"]["tmp_name"])) {
+    //     return "fail|" . $_FILES["file"]["error"];
+    // }
+
+    $c = file_get_contents("php://input");
 
     $token = md5($token);
 
@@ -76,10 +79,14 @@ function uploadFile($token, $callback = null, $args = null) {
     $filename = $token . ".zip";
     $filepath = $uploaddir . "/$filename";
 
-    $ret = move_uploaded_file($_FILES["file"]["tmp_name"], $filepath);
-    if (!$ret) {
-        return "fail|移动文件失败.";
+    if (!file_put_contents($filepath, $c)) {
+        return "fail|创建文件失败.";
     }
+
+    // $ret = move_uploaded_file($_FILES["file"]["tmp_name"], $filepath);
+    // if (!$ret) {
+    //     return "fail|移动文件失败.";
+    // }
 
     if ($callback != null) {
         return $callback("$sz/$filename", $args);
