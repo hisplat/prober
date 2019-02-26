@@ -1,0 +1,5 @@
+vendor
+components
+logs
+route/default.php
+composer.lock
