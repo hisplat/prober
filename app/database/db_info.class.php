@@ -11,7 +11,7 @@ class db_info extends database {
         return self::$instance;
     }
 
-    private function db_info() {
+    private function __construct() {
         $this->init(MYSQL_DATABASE);
     }
 
