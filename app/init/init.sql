@@ -26,7 +26,11 @@ CREATE TABLE `prober_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` varchar(32) NOT NULL,
   `message` text NOT NULL,
+  `name` text NOT NULL,
   `contact` text NOT NULL,
+  `time` int(11) NOT NULL,
+  `messageip` text NOT NULL,
+  `uploadip` text NOT NULL,
   `filename` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `token` (`token`)
@@ -51,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-26 14:17:01
+-- Dump completed on 2019-02-27 17:16:38
