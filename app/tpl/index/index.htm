@@ -27,7 +27,7 @@
                     <td>{{f.name}}</td>
                     <td>{{f.contact}}</td>
                     <td>{{f.message}}</td>
-                    <td><a v-bind:href="f.fileurl" v-if="f.filename != ''">点击下载</a></td>
+                    <td><a v-bind:href="f.fileurl" v-if="f.filename != null && f.filename != ''">点击下载</a></td>
                 </tr>
             </tbody>
         </table>
