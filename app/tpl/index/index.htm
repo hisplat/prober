@@ -16,8 +16,6 @@
                     <th>builddate</th>
                     <th>version</th>
                     <th>file</th>
-                    <th>comment</th>
-                    <th>op</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,8 +30,6 @@
                     <td>{{f.builddate}}</td>
                     <td>{{f.softversion}}</td>
                     <td><a v-bind:href="f.fileurl" v-if="f.filename != null && f.filename != ''">点击下载</a></td>
-                    <td></td>
-                    <td><button class='btn btn-default'>comment</button></td>
                 </tr>
             </tbody>
         </table>
