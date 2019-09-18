@@ -35,7 +35,7 @@ class db_info extends database {
         $infotable = MYSQL_PREFIX . "info";
         $parsedtable = MYSQL_PREFIX . "parsed";
         // return $this->get_all_table($infotable, "", "ORDER BY id DESC");
-        $sql = "SELECT info.*, pt.infoid, pt.productname, pt.branch, pt.fingerprint, pt.builddate, pt.softversion FROM $infotable info 
+        $sql = "SELECT info.*, pt.infoid, pt.productname, pt.branch, pt.fingerprint, pt.builddate, pt.softversion, pt.device FROM $infotable info 
             LEFT JOIN (
                 SELECT * FROM $parsedtable
             ) pt

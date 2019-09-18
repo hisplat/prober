@@ -13,6 +13,7 @@
                     <th>contact</th>
                     <th>message</th>
                     <th>product</th>
+                    <th>device</th>
                     <th>builddate</th>
                     <th>file</th>
                 </tr>
@@ -26,6 +27,7 @@
                     <td>Name: {{f.name}}<br />Tel: {{f.contact}}</td>
                     <td>{{f.message}}</td>
                     <td>{{f.productname}}</td>
+                    <td>{{f.device}}</td>
                     <td>{{f.builddate}}</td>
                     <td><a v-bind:href="f.fileurl" v-if="f.filename != null && f.filename != ''">点击下载</a></td>
                 </tr>
