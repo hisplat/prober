@@ -30,6 +30,23 @@ class info_controller extends v1_base {
         $ret = db_info::inst()->update_message($token, $message, $name, $contact);
         return $this->checkRet($ret);
     }
+
+    public function unparsed_action() {
+        $files = db_info::inst()->get_unparsed_files();
+        return $files;
+    }
+
+    public function updateparsed_action() {
+        $id=get_request_assert("id");
+        $product=get_request_assert("product");
+        $version=get_request_assert("version");
+        $builddate=get_request_assert("builddate");
+        $device=get_request_assert("device");
+        $fingerprint=get_request_assert("fingerprint");
+
+        $ret = db_info::inst()->update_parsed($id, $product, $fingerprint, $builddate, $version, $device);
+        return $this->checkRet($ret);
+    }
 }
 
 

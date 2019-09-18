@@ -21,11 +21,11 @@ class db_info extends database {
         if ($result !== false) {
             while ($tmpArray = $result->fetch(PDO::FETCH_ASSOC)) {
                 $tmpArray = $this->do_unescape($tmpArray);
-                if (isset($tmpArray["id"])) {
-                    $resArray[$tmpArray["id"]] = $tmpArray;
-                } else {
+                // if (isset($tmpArray["id"])) {
+                //     $resArray[$tmpArray["id"]] = $tmpArray;
+                // } else {
                     $resArray[] = $tmpArray;
-                }
+                // }
             }
         }
         return $resArray;
@@ -33,7 +33,14 @@ class db_info extends database {
 
     public function all() {
         $infotable = MYSQL_PREFIX . "info";
-        return $this->get_all_table($infotable, "", "ORDER BY id DESC");
+        $parsedtable = MYSQL_PREFIX . "parsed";
+        // return $this->get_all_table($infotable, "", "ORDER BY id DESC");
+        $sql = "SELECT info.*, pt.infoid, pt.productname, pt.branch, pt.fingerprint, pt.builddate, pt.softversion FROM $infotable info 
+            LEFT JOIN (
+                SELECT * FROM $parsedtable
+            ) pt
+            ON info.id = pt.infoid ORDER BY info.id DESC";
+        return $this->doQuery($sql);
     }
 
     public function get_by_token($token) {
@@ -95,6 +102,51 @@ class db_info extends database {
             ), "token = $token");
         }
         return $ret;
+    }
+
+    public function get_unparsed_files() {
+        $infotable = MYSQL_PREFIX . "info";
+        $parsedtable = MYSQL_PREFIX . "parsed";
+        $sql = "SELECT * FROM (
+            SELECT a.filename filename, a.id iid, b.id pid, b.infoid infoid FROM `$infotable` a
+            left join (
+                select * from $parsedtable
+            ) b
+            on a.id = b.infoid
+        ) c where c.infoid is null and c.filename is not null";
+        return $this->doQuery($sql);
+    }
+
+    public function update_parsed($infoid, $product, $fingerprint, $builddate, $softversion, $device) {
+        $infoid = (int)$infoid;
+        $builddate = Date("Y-m-d H:i:s", $builddate);
+
+        $infotable = MYSQL_PREFIX . "info";
+        $parsedtable = MYSQL_PREFIX . "parsed";
+
+        $one = $this->get_one_table($parsedtable, "infoid = $id");
+        if (empty($one)) {
+            $ret = $this->insert($parsedtable, array(
+                "infoid" => $infoid,
+                "productname" => $product,
+                "branch" => "",
+                "fingerprint" => $fingerprint,
+                "builddate" => $builddate,
+                "softversion" => $softversion,
+                "device" => $device,
+            ));
+        } else {
+            $ret = $this->update($parsedtable, array(
+                "productname" => $product,
+                "branch" => "",
+                "fingerprint" => $fingerprint,
+                "builddate" => $builddate,
+                "softversion" => $softversion,
+                "device" => $device,
+            ), "infoid = $infoid");
+        }
+        return $ret;
+
     }
 };
 
