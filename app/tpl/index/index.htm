@@ -14,7 +14,6 @@
                     <th>message</th>
                     <th>product</th>
                     <th>builddate</th>
-                    <th>version</th>
                     <th>file</th>
                 </tr>
             </thead>
@@ -28,7 +27,6 @@
                     <td>{{f.message}}</td>
                     <td>{{f.productname}}</td>
                     <td>{{f.builddate}}</td>
-                    <td>{{f.softversion}}</td>
                     <td><a v-bind:href="f.fileurl" v-if="f.filename != null && f.filename != ''">点击下载</a></td>
                 </tr>
             </tbody>
