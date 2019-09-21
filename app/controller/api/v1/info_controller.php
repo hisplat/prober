@@ -64,7 +64,7 @@ class info_controller extends v1_base {
             unlink($filename);
         }
         $ret = db_info::inst()->remove_record($id);
-        return $filename;
+        return $this->checkRet($ret);
     }
 }
 
