@@ -76,7 +76,7 @@ function uploadFile($token, $callback = null, $args = null) {
         }
     }
 
-    $filename = $token . ".zip";
+    $filename = $token . ".tgz";
     $filepath = $uploaddir . "/$filename";
 
     if (!file_put_contents($filepath, $c)) {

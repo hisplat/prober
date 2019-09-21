@@ -8,14 +8,16 @@
                 <tr>
                     <th>id</th>
                     <th>token</th>
-                    <th>time</th>
-                    <th>address</th>
-                    <th>contact</th>
-                    <th>message</th>
-                    <th>product</th>
-                    <th>device</th>
-                    <th>builddate</th>
-                    <th>file</th>
+                    <th>报告时间</th>
+                    <th>地址信息</th>
+                    <th>联系方式</th>
+                    <th>问题描述</th>
+                    <th>产品</th>
+                    <th>方案</th>
+                    <th>版本日期</th>
+                    <th>备注</th>
+                    <th>下载</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,15 +25,63 @@
                     <td>{{f.id}}</td>
                     <td>{{f.token}}</td>
                     <td>{{f.time}}</td>
-                    <td>QR: {{f.messageip}}<br />TV: {{f.uploadip}}</td>
-                    <td>Name: {{f.name}}<br />Tel: {{f.contact}}</td>
+                    <td>手机IP: {{f.messageip}}<br />电视IP: {{f.uploadip}}</td>
+                    <td>称呼: {{f.name}}<br />电话: {{f.contact}}</td>
                     <td>{{f.message}}</td>
                     <td>{{f.productname}}</td>
                     <td>{{f.device}}</td>
                     <td>{{f.builddate}}</td>
-                    <td><a v-bind:href="f.fileurl" v-if="f.filename != null && f.filename != ''">点击下载</a></td>
+                    <td>{{f.comment}}</td>
+                    <td><a v-bind:href="f.fileurl" v-if="f.filename != null && f.filename != ''" v-bind:vk="k" type="button"><i class="fa fa-download"></i></a></td>
+                    <td>
+                        <a href="#" v-bind:vk="k" type="button" v-on:click="edit"><i class="fa fa-edit"></i></a>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="theModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="theModalLabel">记录信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="theCount">基本信息</label>
+                        <table class="table table-bordered" id="theCount">
+                            <tr><td>id</td><td>{{model.id}}</td></tr>
+                            <tr><td>token</td><td>{{model.token}}</td></tr>
+                            <tr><td>报告时间</td><td>{{model.time}}</td></tr>
+                            <tr><td>手机IP</td><td>{{model.messageip}}</td></tr>
+                            <tr><td>电视IP</td><td>{{model.uploadip}}</td></tr>
+                            <tr><td>联系方式</td><td>{{model.contact}}</td></tr>
+                            <tr><td>问题描述</td><td>{{model.message}}</td></tr>
+                            <tr><td>产品</td><td>{{model.product}}</td></tr>
+                            <tr><td>方案</td><td>{{model.device}}</td></tr>
+                            <tr><td>编译时间</td><td>{{model.builddate}}</td></tr>
+                            <tr><td>文件</td><td><a v-bind:href="model.fileurl">{{model.filename}}</a></td></tr>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label for="theComment">备注</label>
+                        <div id="theComment" style="height: 100px;">
+                            <textarea id="theComment" class="col-md-12" rows=5 style="resize:none;" v-model="model.comment"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" v-on:click="remove">删除记录</button>
+                    <button type="button" class="btn btn-primary" v-on:click="ensure">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
 </div>
+

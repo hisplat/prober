@@ -39,7 +39,7 @@ class db_info extends database {
             LEFT JOIN (
                 SELECT * FROM $parsedtable
             ) pt
-            ON info.id = pt.infoid ORDER BY info.id DESC";
+            ON info.id = pt.infoid WHERE removed = 0 ORDER BY info.id DESC";
         return $this->doQuery($sql);
     }
 
@@ -48,6 +48,18 @@ class db_info extends database {
 
         $token = $this->escape($token);
         return $this->get_one_table($infotable, "token = $token");
+    }
+
+    public function get_by_id($id) {
+        $id = (int)$id;
+        $infotable = MYSQL_PREFIX . "info";
+        return $this->get_one_table($infotable, "id = $id");
+    }
+
+    public function remove_record($id) {
+        $id = (int)$id;
+        $infotable = MYSQL_PREFIX . "info";
+        return $this->update($infotable, array("removed" => 1), "id = $id");
     }
 
     public function update_message($token, $message, $name, $contact) {
@@ -77,6 +89,15 @@ class db_info extends database {
             ), "token = $token");
         }
         return $ret;
+    }
+
+
+    public function update_comment($id, $comment) {
+        $id = (int)$id;
+        $infotable = MYSQL_PREFIX . "info";
+        return $this->update($infotable, array(
+            "comment" => $comment,
+        ), "id = $id");
     }
 
     public function update_filename($token, $filename) {

@@ -31,21 +31,40 @@ class info_controller extends v1_base {
         return $this->checkRet($ret);
     }
 
+    public function updatecomment_action() {
+        $id = get_request_assert("id");
+        $comment = get_request_assert("comment");
+        $ret = db_info::inst()->update_comment($id, $comment);
+        return $this->checkRet($ret);
+    }
+
     public function unparsed_action() {
         $files = db_info::inst()->get_unparsed_files();
         return $files;
     }
 
     public function updateparsed_action() {
-        $id=get_request_assert("id");
-        $product=get_request_assert("product");
-        $version=get_request_assert("version");
-        $builddate=get_request_assert("builddate");
-        $device=get_request_assert("device");
-        $fingerprint=get_request_assert("fingerprint");
+        $id = get_request_assert("id");
+        $product = get_request_assert("product");
+        $version = get_request_assert("version");
+        $builddate = get_request_assert("builddate");
+        $device = get_request_assert("device");
+        $fingerprint = get_request_assert("fingerprint");
 
         $ret = db_info::inst()->update_parsed($id, $product, $fingerprint, $builddate, $version, $device);
         return $this->checkRet($ret);
+    }
+
+    public function remove_action() {
+        $id = get_request_assert("id");
+        $one = db_info::inst()->get_by_id($id);
+        $filename = $one["filename"];
+        if (!empty($filename)) {
+            $filename = UPLOAD_DIR . "/$filename";
+            unlink($filename);
+        }
+        $ret = db_info::inst()->remove_record($id);
+        return $filename;
     }
 }
 
