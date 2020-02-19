@@ -17,6 +17,7 @@ $(document).ready(function() {
     });
 
     var reload_data = function() {
+        /*
         __request("api.v1.info.message", {}, function(res) {
             console.debug(res);
             if (res.data == null) {
@@ -26,6 +27,7 @@ $(document).ready(function() {
             page.name = res.data.name;
             page.contact = res.data.contact;
         });
+        */
     }
 
     reload_data();
