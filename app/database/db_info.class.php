@@ -39,7 +39,7 @@ class db_info extends database {
             LEFT JOIN (
                 SELECT * FROM $parsedtable
             ) pt
-            ON info.id = pt.infoid WHERE removed = 0 ORDER BY info.id DESC";
+            ON info.id = pt.infoid WHERE removed = 0 ORDER BY info.id DESC LIMIT 1000";
         return $this->doQuery($sql);
     }
 

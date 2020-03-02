@@ -284,5 +284,11 @@ img.user-face {
 body { font-family: "Microsoft YaHei","Lato","Helvetica Neue",Arial,Helvetica,sans-serif; }
 
 
-
+.max100 {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    width: 200px;
+    max-width: 250px;
+}
 
