@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.57, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: prober
 -- ------------------------------------------------------
--- Server version	5.5.57-0ubuntu0.14.04.1
+-- Server version	5.7.29-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,27 +24,43 @@ DROP TABLE IF EXISTS `prober_info`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `prober_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `token` varchar(32) NOT NULL,
-  `message` text NOT NULL,
-  `name` text NOT NULL,
-  `contact` text NOT NULL,
-  `time` int(11) NOT NULL,
-  `messageip` text NOT NULL,
-  `uploadip` text NOT NULL,
-  `filename` text NOT NULL,
+  `token` varchar(32) DEFAULT NULL,
+  `message` text,
+  `name` text,
+  `contact` text,
+  `time` int(11) NOT NULL DEFAULT '0',
+  `messageip` text,
+  `uploadip` text,
+  `filename` text,
+  `comment` text,
+  `removed` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `token` (`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `token` (`token`),
+  KEY `removed` (`removed`),
+  KEY `time` (`time`)
+) ENGINE=InnoDB AUTO_INCREMENT=15438 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `prober_info`
+-- Table structure for table `prober_parsed`
 --
 
-LOCK TABLES `prober_info` WRITE;
-/*!40000 ALTER TABLE `prober_info` DISABLE KEYS */;
-/*!40000 ALTER TABLE `prober_info` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `prober_parsed`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `prober_parsed` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `infoid` int(11) NOT NULL,
+  `productname` text,
+  `branch` text,
+  `fingerprint` text,
+  `builddate` text,
+  `softversion` text,
+  `device` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `infoid` (`infoid`)
+) ENGINE=InnoDB AUTO_INCREMENT=15116 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -55,4 +71,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-27 17:16:38
+-- Dump completed on 2020-03-26 15:13:33
