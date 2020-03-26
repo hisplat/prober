@@ -62,9 +62,15 @@ class info_controller extends v1_base {
         if (!empty($filename)) {
             $filename = UPLOAD_DIR . "/$filename";
             unlink($filename);
+            logging::d("Remove", "unlink $filename.");
         }
         $ret = db_info::inst()->remove_record($id);
         return $this->checkRet($ret);
+    }
+
+    public function listdeprecated_action() {
+        $data = db_info::inst()->list_deprecated();
+        return $data;
     }
 }
 

@@ -59,7 +59,14 @@ class db_info extends database {
     public function remove_record($id) {
         $id = (int)$id;
         $infotable = MYSQL_PREFIX . "info";
-        return $this->update($infotable, array("removed" => 1), "id = $id");
+        $parsedtable = MYSQL_PREFIX . "parsed";
+
+        // return $this->update($infotable, array("removed" => 1), "id = $id");
+
+        $sql1 = "DELETE FROM `$infotable` WHERE id = $id";
+        $sql2 = "DELETE FROM `$parsedtable` WHERE infoid = $id";
+        $this->doQuery($sql2);
+        return $this->doQuery($sql1);
     }
 
     public function update_message($token, $message, $name, $contact) {
@@ -169,6 +176,14 @@ class db_info extends database {
         return $ret;
 
     }
+
+    public function list_deprecated() {
+        $infotable = MYSQL_PREFIX . "info";
+        $parsedtable = MYSQL_PREFIX . "parsed";
+        $sql = "SELECT * FROM `$infotable` WHERE (now() - from_unixtime(time) > 30 * 24 * 3600) OR (now() -  from_unixtime(time) > 3 * 24 * 3600 AND message is null)";
+        return $this->doQuery($sql);
+    }
+
 };
 
 
