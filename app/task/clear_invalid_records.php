@@ -6,6 +6,9 @@ $plain = file_get_contents("http://leopard.hismarttv.com/hisplat/prober/?action=
 $deprecated = json_decode($plain, true);
 
 
+if (empty($deprecated)) {
+    exit(0);
+}
 
 $total = count($deprecated);
 $index = 1;
