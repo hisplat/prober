@@ -180,7 +180,7 @@ class db_info extends database {
     public function list_deprecated() {
         $infotable = MYSQL_PREFIX . "info";
         $parsedtable = MYSQL_PREFIX . "parsed";
-        $sql = "SELECT * FROM `$infotable` WHERE (now() - from_unixtime(time) > 30 * 24 * 3600) OR (now() -  from_unixtime(time) > 3 * 24 * 3600 AND (message is null AND name is null AND contact is null))";
+        $sql = "SELECT * FROM `$infotable` WHERE (unix_timestamp(now()) - time > 30 * 24 * 3600) OR (unix_timestamp(now()) - time > 3 * 24 * 3600 AND (message is null AND name is null AND contact is null))";
         return $this->doQuery($sql);
     }
 
